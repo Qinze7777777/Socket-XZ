@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+    <script language="javascript">
+        function config() {
+            var ssid = configForm.ssid.value;
+            var password = configForm.password.value;
+            var mqtt_server = configForm.mqtt_server.value;
+            var mqtt_port = configForm.mqtt_port.value;
+            var mqtt_user = configForm.mqtt_user.value;
+            var mqtt_password = configForm.mqtt_password.value;
+            var mqtt_topic = configForm.mqtt_topic.value;
+            if (('' == ssid) && ('' == password)  && ('' == mqtt_server) && ('' == mqtt_port) && ('' == mqtt_topic)) {
+                alert('[WiFi名称、WiFi密码]、或者[MQTT server、port、topic]，至少要填写一组!');
+                return;
+            }
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "/config?ssid=" + ssid + "&password=" + password + "&mqtt_server=" + mqtt_server + "&mqtt_port=" + mqtt_port + "&mqtt_user=" + mqtt_user + "&mqtt_password=" + mqtt_password + "&mqtt_topic=" + mqtt_topic, true);
+            xmlhttp.send();
+            alert('已提交，保存后设备会自动重启!');
+        }
+    </script>
+</head>
+
+<body>
+    <p>test网页配网</p>
+    <form name="configForm">
+        WiFi名称:
+        <input type="text" name="ssid" placeholder="请输入WiFi名称,留空不设置" value="{ssid}">
+        <br>
+        WiFi密码:
+        <input type="text" name="password" placeholder="请输入WiFi密码,留空不设置" value="{password}">
+        <br>
+        MQTT host:
+        <input type="text" name="mqtt_server" placeholder="请输入MQTT服务器地址,留空不设置" value="{mqtt_server}">
+        <br>
+        MQTT port:
+        <input type="text" name="mqtt_port" placeholder="请输入MQTT服务器端口,留空不设置" value="{mqtt_port}">
+        <br>
+        MQTT username:
+        <input type="text" name="mqtt_user" placeholder="请输入MQTT用户名,留空不设置" value="{mqtt_user}">
+        <br>
+        MQTT password:
+        <input type="text" name="mqtt_password" placeholder="请输入MQTT密码,留空不设置" value="{mqtt_password}">
+        <br>
+        MQTT topic:
+        <input type="text" name="mqtt_topic" placeholder="请输入MQTT topic,留空不设置" value="{mqtt_topic}">
+        <br>
+        <input type="button" value="确定" onclick="config()">
+    </form>
+</body>
+</html>
